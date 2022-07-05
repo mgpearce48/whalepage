@@ -13,7 +13,6 @@ pipeline {
             steps {
                 echo 'build stage...'
                 sh 'node --version'
-                sh 'ls -la'
             }
         }
 
