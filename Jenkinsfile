@@ -1,30 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'nginx:latest'
-            args '-p 80:80'
-        }
-    }
-    environment {
-        CI = 'true'
-    }
+    agent none
     stages {
-         stage('build') {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3.8.1-adoptopenjdk-11' }
+            }
             steps {
-                echo 'build stage...'
+                sh 'mvn --version'
             }
         }
-
-        stage('test') {
-            steps {
-                echo 'test stage...'
+        stage('Front-end') {
+            agent {
+                docker { image 'node:16.13.1-alpine' }
             }
-        }
-
-        stage('deploy') {
             steps {
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                echo 'deploy stage...'
+                sh 'node --version'
             }
         }
     }
