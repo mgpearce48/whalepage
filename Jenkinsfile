@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'node:lts-buster-slim'
-            args '-p 80:3000'
+            image 'nginx:latest'
+            args '-p 80:80'
         }
     }
     environment {
@@ -12,9 +12,6 @@ pipeline {
          stage('build') {
             steps {
                 echo 'build stage...'
-                sh 'ls -la'
-                sh 'whoami'
-                sh 'pwd'
             }
         }
 
@@ -26,6 +23,7 @@ pipeline {
 
         stage('deploy') {
             steps {
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 echo 'deploy stage...'
             }
         }
