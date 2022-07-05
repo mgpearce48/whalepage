@@ -1,24 +1,29 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 80:3000'
+        }
+    }
+    environment {
+        CI = 'true'
+    }
     stages {
-        /* "Build" and "Test" stages omitted */
-
-        stage('Deploy - Staging') {
+         stage('build') {
             steps {
-                sh './deploy staging'
-                sh './run-smoke-tests'
+                echo 'build stage...'
             }
         }
 
-        stage('Sanity check') {
+        stage('test') {
             steps {
-                input "Does the staging environment look ok?"
+                echo 'test stage...'
             }
         }
 
-        stage('Deploy - Production') {
+        stage('deploy') {
             steps {
-                sh './deploy production'
+                echo 'deploy stage...'
             }
         }
     }
