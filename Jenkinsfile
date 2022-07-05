@@ -14,6 +14,7 @@ pipeline {
                 echo 'build stage...'
                 sh 'ls -la'
                 sh 'whoami'
+                sh 'pwd'
             }
         }
 
