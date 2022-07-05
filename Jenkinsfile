@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'nginx:latest'
-            args '-p 80:80'
+            image 'node:lts-buster-slim'
+            args '-p 80:3000'
         }
     }
     environment {
@@ -12,6 +12,7 @@ pipeline {
          stage('build') {
             steps {
                 echo 'build stage...'
+                sh 'ls -la'
                 sh 'whoami'
             }
         }
