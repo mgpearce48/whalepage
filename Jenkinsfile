@@ -12,7 +12,7 @@ pipeline {
          stage('build') {
             steps {
                 echo 'build stage...'
-                echo 'whoami'
+                sh 'whoami'
             }
         }
 
